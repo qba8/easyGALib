@@ -43,8 +43,11 @@
   <ItemGroup>
     <Compile Include="Algorithm\GABase.cs" />
     <Compile Include="Chromosomes\Chromosome.cs" />
+    <Compile Include="Chromosomes\ChromosomeType.cs" />
     <Compile Include="Constants\Exceptions.cs" />
     <Compile Include="Constants\Settings.cs" />
+    <Compile Include="Interfaces\GeneticAlgorithm.cs" />
+    <Compile Include="Interfaces\IGAParameters.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

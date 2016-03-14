@@ -1,6 +1,6 @@
 ﻿namespace easyGALib.Chromosomes
 {
-    internal abstract class Chromosome
+    public abstract class Chromosome
     {
     }
 }
