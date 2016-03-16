@@ -2,8 +2,7 @@
 
 namespace easyGALib.Algorithm
 {
-    internal abstract class GABase : IGABase
+    internal class GAInt : GABase, IGAInt
     {
-
     }
 }

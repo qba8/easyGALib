@@ -2,7 +2,7 @@
 
 namespace easyGALib.Interfaces
 {
-    public interface GeneticAlgorithm
+    public interface IGeneticAlgorithmInput
     {
         double GetFitness(Chromosome chromosome);
         IGAParameters Parameters { get; set; }

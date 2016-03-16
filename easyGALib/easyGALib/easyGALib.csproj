@@ -41,15 +41,28 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Algorithm\GAChar.cs" />
     <Compile Include="Algorithm\GABase.cs" />
+    <Compile Include="Algorithm\GADouble.cs" />
+    <Compile Include="Algorithm\GAInt.cs" />
+    <Compile Include="Algorithm\GAMain.cs" />
+    <Compile Include="Algorithm\GAString.cs" />
     <Compile Include="Chromosomes\Chromosome.cs" />
     <Compile Include="Chromosomes\ChromosomeType.cs" />
     <Compile Include="Constants\Exceptions.cs" />
     <Compile Include="Constants\Settings.cs" />
-    <Compile Include="Interfaces\GeneticAlgorithm.cs" />
+    <Compile Include="Factories\GAFactory.cs" />
+    <Compile Include="Interfaces\Algorithm\IGABase.cs" />
+    <Compile Include="Interfaces\Algorithm\IGAChar.cs" />
+    <Compile Include="Interfaces\Algorithm\IGADouble.cs" />
+    <Compile Include="Interfaces\Algorithm\IGAInt.cs" />
+    <Compile Include="Interfaces\Algorithm\IGAString.cs" />
+    <Compile Include="Interfaces\Factories\IGAFactory.cs" />
+    <Compile Include="Interfaces\IGeneticAlgorithmInput.cs" />
     <Compile Include="Interfaces\IGAParameters.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
