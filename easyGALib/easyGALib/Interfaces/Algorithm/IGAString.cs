@@ -1,6 +1,6 @@
 ﻿namespace easyGALib.Interfaces.Algorithm
 {
-    public interface IGAString : IGABase
+    internal interface IGAString : IGABase
     {
     }
 }

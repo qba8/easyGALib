@@ -16,10 +16,10 @@ namespace easyGALib.Algorithm
             _gaFactory = new GAFactory();
         }
 
-        public Chromosome Execute()
+        public IGAResult Execute()
         {
             IGABase ga = _gaFactory.GetGA(_input.Parameters.CromosomeType); 
-            return null;
+            return ga.Execute(_input);
         }
     }
 }

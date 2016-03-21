@@ -46,7 +46,9 @@
     <Compile Include="Algorithm\GADouble.cs" />
     <Compile Include="Algorithm\GAInt.cs" />
     <Compile Include="Algorithm\GAMain.cs" />
+    <Compile Include="Algorithm\GAResult.cs" />
     <Compile Include="Algorithm\GAString.cs" />
+    <Compile Include="Interfaces\Algorithm\IGAResult.cs" />
     <Compile Include="Chromosomes\Chromosome.cs" />
     <Compile Include="Chromosomes\ChromosomeType.cs" />
     <Compile Include="Constants\Exceptions.cs" />
