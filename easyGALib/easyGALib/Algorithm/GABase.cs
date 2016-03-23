@@ -1,4 +1,5 @@
 ﻿using System;
+using easyGALib.Chromosomes;
 using easyGALib.Interfaces;
 using easyGALib.Interfaces.Algorithm;
 
@@ -8,31 +9,44 @@ namespace easyGALib.Algorithm
     {
         public IGAResult Execute(IGeneticAlgorithmInput input)
         {
-            PopulationInit();
-
-            bool mostMatched = false;
             long generation = 0;
 
-            while (!(mostMatched && generation > input.Parameters.GenerationsLimit))
+            PopulationInit();
+
+            while (!IsFinalGeneration())
             {
                 CalculateFitness();
-                int fittedChromosomesCount = CountFittedChromosomes();
-                mostMatched = fittedChromosomesCount / input.Parameters.ChromosomesQuantity > 0.9;
-                if (!mostMatched)
-                {
-                    Mutate();
-                }
+                SelectChromosomes();
+                Crossover();
+                Mutate();
+
+                generation++;
             }
 
-            return null;
+            return new GAResult() { BestChromosome = GetBestChromosome() };
         }
 
-        private void Mutate()
+        private Chromosome GetBestChromosome()
         {
             throw new NotImplementedException();
         }
 
-        private int CountFittedChromosomes()
+        private void Crossover()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void SelectChromosomes()
+        {
+            throw new NotImplementedException();
+        }
+
+        private bool IsFinalGeneration()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void Mutate()
         {
             throw new NotImplementedException();
         }
