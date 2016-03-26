@@ -2,6 +2,7 @@
 using easyGALib.Chromosomes;
 using easyGALib.Interfaces;
 using easyGALib.Interfaces.Algorithm;
+using easyGALib.Interfaces.Chromosomes;
 
 namespace easyGALib.Algorithm
 {
@@ -26,7 +27,7 @@ namespace easyGALib.Algorithm
             return new GAResult() { BestChromosome = GetBestChromosome() };
         }
 
-        private Chromosome GetBestChromosome()
+        private IChromosome GetBestChromosome()
         {
             throw new NotImplementedException();
         }

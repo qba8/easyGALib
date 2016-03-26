@@ -48,6 +48,10 @@
     <Compile Include="Algorithm\GAMain.cs" />
     <Compile Include="Algorithm\GAResult.cs" />
     <Compile Include="Algorithm\GAString.cs" />
+    <Compile Include="Chromosomes\CharChromosome.cs" />
+    <Compile Include="Chromosomes\DoubleChromosome.cs" />
+    <Compile Include="Chromosomes\IntChromosome.cs" />
+    <Compile Include="Chromosomes\StringChromosome.cs" />
     <Compile Include="Interfaces\Algorithm\IGAResult.cs" />
     <Compile Include="Chromosomes\Chromosome.cs" />
     <Compile Include="Chromosomes\ChromosomeType.cs" />
@@ -59,6 +63,11 @@
     <Compile Include="Interfaces\Algorithm\IGADouble.cs" />
     <Compile Include="Interfaces\Algorithm\IGAInt.cs" />
     <Compile Include="Interfaces\Algorithm\IGAString.cs" />
+    <Compile Include="Interfaces\Chromosomes\ICharChromosome.cs" />
+    <Compile Include="Interfaces\Chromosomes\IChromosome.cs" />
+    <Compile Include="Interfaces\Chromosomes\IDoubleChromosome.cs" />
+    <Compile Include="Interfaces\Chromosomes\IIntChromosome.cs" />
+    <Compile Include="Interfaces\Chromosomes\IStringChromosome.cs" />
     <Compile Include="Interfaces\Factories\IGAFactory.cs" />
     <Compile Include="Interfaces\IGeneticAlgorithmInput.cs" />
     <Compile Include="Interfaces\IGAParameters.cs" />

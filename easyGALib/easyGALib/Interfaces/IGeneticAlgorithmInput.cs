@@ -1,10 +1,10 @@
-﻿using easyGALib.Chromosomes;
+﻿using easyGALib.Interfaces.Chromosomes;
 
 namespace easyGALib.Interfaces
 {
     public interface IGeneticAlgorithmInput
     {
-        double GetFitness(Chromosome chromosome);
+        double GetFitness(IChromosome chromosome);
         IGAParameters Parameters { get; set; }
     }
 }
