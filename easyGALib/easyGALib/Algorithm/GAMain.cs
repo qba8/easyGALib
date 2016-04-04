@@ -1,5 +1,4 @@
-﻿using easyGALib.Chromosomes;
-using easyGALib.Factories;
+﻿using easyGALib.Factories;
 using easyGALib.Interfaces;
 using easyGALib.Interfaces.Algorithm;
 using easyGALib.Interfaces.Factories;

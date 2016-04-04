@@ -7,5 +7,6 @@ namespace easyGALib.Interfaces
         ChromosomeType CromosomeType { get; set; }
         long GenerationsLimit { get; set; }
         int ChromosomesQuantity { get; set; }
+        int RandomSelectionChance { get; set; }
     }
 }
