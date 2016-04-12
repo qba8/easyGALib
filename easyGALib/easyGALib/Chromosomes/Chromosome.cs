@@ -26,5 +26,11 @@ namespace easyGALib.Chromosomes
         {
             throw new NotImplementedException();
         }
+
+        public abstract IChromosome OnePtCrossover(IChromosome parentB);
+
+        public abstract IChromosome TwoPtCrossover(IChromosome parentB);
+
+        public abstract IChromosome UniformCrossover(IChromosome parentB);
     }
 }

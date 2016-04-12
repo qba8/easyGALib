@@ -1,7 +1,7 @@
 ﻿using easyGALib.Interfaces.Algorithm;
 using easyGALib.Interfaces.Factories;
 using easyGALib.Algorithm;
-using easyGALib.Chromosomes;
+using easyGALib.Types;
 
 namespace easyGALib.Factories
 {

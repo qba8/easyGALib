@@ -2,7 +2,9 @@
 using easyGALib.Interfaces;
 using easyGALib.Interfaces.Algorithm;
 using easyGALib.Interfaces.Chromosomes;
+using easyGALib.Helpers;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace easyGALib.Algorithm
 {
@@ -28,6 +30,9 @@ namespace easyGALib.Algorithm
                 Crossover();
                 Mutate();
 
+                NextGeneration.RemoveAt(NextGeneration.Count - 1);
+                NextGeneration.Add(BestChromosome.CreateCopy());
+
                 generation++;
             }
 
@@ -36,11 +41,45 @@ namespace easyGALib.Algorithm
 
         private void Crossover()
         {
-            throw new NotImplementedException();
+            Random rdm = new Random();
+
+            NextGeneration.Shuffle();
+
+            int length = NextGeneration.Count;
+            if (length % 2 == 1)
+            {
+                length--;
+            }
+
+            for (int i = 0; i < length; i += 2)
+            {
+                var parentA = NextGeneration[i];
+                var parentB = NextGeneration[i + 1];
+
+                if (rdm.Next(0, 100) < _input.Parameters.CrossoverChance)
+                {
+                    switch (_input.Parameters.CrossoverType)
+                    {
+                        case Types.CrossoverType.OnePt:
+                            parentA.OnePtCrossover(parentB);
+                            break;
+                        case Types.CrossoverType.TwoPt:
+                            parentA.TwoPtCrossover(parentB);
+                            break;
+                        case Types.CrossoverType.Uniform:
+                            parentA.UniformCrossover(parentB);
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
         }
 
         private void SelectChromosomes()
         {
+            NextGeneration.Clear();
+
             //Elitism - best chromosome always go to the next generation
             NextGeneration.Add(BestChromosome.CreateCopy());
 

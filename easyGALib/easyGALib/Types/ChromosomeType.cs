@@ -1,4 +1,4 @@
-﻿namespace easyGALib.Chromosomes
+﻿namespace easyGALib.Types
 {
     public enum ChromosomeType
     {

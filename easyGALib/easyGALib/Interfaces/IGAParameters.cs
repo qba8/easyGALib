@@ -1,12 +1,15 @@
-﻿using easyGALib.Chromosomes;
+﻿using easyGALib.Types;
 
 namespace easyGALib.Interfaces
 {
     public interface IGAParameters
     {
         ChromosomeType CromosomeType { get; set; }
+        CrossoverType CrossoverType { get; set; }
+
         long GenerationsLimit { get; set; }
         int ChromosomesQuantity { get; set; }
         int RandomSelectionChance { get; set; }
+        int CrossoverChance { get; set; }
     }
 }

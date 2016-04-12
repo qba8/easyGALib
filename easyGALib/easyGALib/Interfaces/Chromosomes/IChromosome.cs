@@ -7,5 +7,9 @@ namespace easyGALib.Interfaces.Chromosomes
         ICollection Genes { get; set; }
         double FitnessRank { get; set; }
         IChromosome CreateCopy();
+
+        IChromosome OnePtCrossover(IChromosome parentB);
+        IChromosome TwoPtCrossover(IChromosome parentB);
+        IChromosome UniformCrossover(IChromosome parentB);
     }
 }
