@@ -11,17 +11,22 @@ namespace easyGALib.Chromosomes
             Genes = new List<string>();
         }
 
-        public override IChromosome OnePtCrossover(IChromosome parentB)
+        public override void Mutate()
         {
             throw new NotImplementedException();
         }
 
-        public override IChromosome TwoPtCrossover(IChromosome parentB)
+        public override void OnePtCrossover(IChromosome parentB)
         {
             throw new NotImplementedException();
         }
 
-        public override IChromosome UniformCrossover(IChromosome parentB)
+        public override void TwoPtCrossover(IChromosome parentB)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void UniformCrossover(IChromosome parentB)
         {
             throw new NotImplementedException();
         }

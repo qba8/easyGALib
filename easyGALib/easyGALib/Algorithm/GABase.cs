@@ -121,7 +121,15 @@ namespace easyGALib.Algorithm
 
         private void Mutate()
         {
-            throw new NotImplementedException();
+            Random rdm = new Random();
+
+            foreach (IChromosome item in NextGeneration)
+            {
+                if (_input.Parameters.MutationChance > rdm.Next(0, 100))
+                {
+                    item.Mutate();
+                }
+            }
         }
 
         private void CalculateFitness()

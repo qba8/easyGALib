@@ -20,17 +20,19 @@ namespace easyGALib.Chromosomes
             }
         }
 
-        public ICollection Genes { get; set; }
+        public IList Genes { get; set; }
 
         public IChromosome CreateCopy()
         {
             throw new NotImplementedException();
         }
 
-        public abstract IChromosome OnePtCrossover(IChromosome parentB);
+        public abstract void Mutate();
 
-        public abstract IChromosome TwoPtCrossover(IChromosome parentB);
+        public abstract void OnePtCrossover(IChromosome parentB);
 
-        public abstract IChromosome UniformCrossover(IChromosome parentB);
+        public abstract void TwoPtCrossover(IChromosome parentB);
+
+        public abstract void UniformCrossover(IChromosome parentB);
     }
 }

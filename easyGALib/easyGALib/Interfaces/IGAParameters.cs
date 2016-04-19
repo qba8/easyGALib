@@ -11,5 +11,6 @@ namespace easyGALib.Interfaces
         int ChromosomesQuantity { get; set; }
         int RandomSelectionChance { get; set; }
         int CrossoverChance { get; set; }
+        int MutationChance { get; set; }
     }
 }
