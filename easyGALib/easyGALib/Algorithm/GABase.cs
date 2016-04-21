@@ -14,7 +14,9 @@ namespace easyGALib.Algorithm
         public IChromosome BestChromosome { get; set; }
         public List<IChromosome> NextGeneration { get; set; }
 
-        IGeneticAlgorithmInput _input;
+        public abstract void ChildrenInit();
+
+        protected IGeneticAlgorithmInput _input;
 
         public IGAResult Execute(IGeneticAlgorithmInput input)
         {
@@ -23,7 +25,7 @@ namespace easyGALib.Algorithm
 
             PopulationInit();
 
-            while (!IsFinalGeneration())
+            while (!IsFinalGeneration(generation))
             {
                 CalculateFitness();
                 SelectChromosomes();
@@ -105,7 +107,7 @@ namespace easyGALib.Algorithm
                 {
                     found = true;
                 }
-                else if (CurrentGeneration[index].FitnessRank > rdm.Next(0, 100)) //Better chromosome = bigger chance to go to the next generation
+                else if (CurrentGeneration[index].FitnessRank > rdm.Next(0, _input.Parameters.ChromosomesQuantity)) //Better chromosome = bigger chance to go to the next generation
                 {
                     found = true;
                 }
@@ -114,9 +116,9 @@ namespace easyGALib.Algorithm
             return CurrentGeneration[index];
         }
 
-        private bool IsFinalGeneration()
+        private bool IsFinalGeneration(long generation)
         {
-            throw new NotImplementedException();
+            return generation >= _input.Parameters.GenerationsLimit;
         }
 
         private void Mutate()
@@ -134,12 +136,24 @@ namespace easyGALib.Algorithm
 
         private void CalculateFitness()
         {
-            throw new NotImplementedException();
+            foreach (var chromosome in CurrentGeneration)
+            {
+                chromosome.Fitness = _input.GetFitness(chromosome);
+            }
+
+            CurrentGeneration = CurrentGeneration.OrderBy(g => g.Fitness).ToList();
+
+            for (int i = 0; i < CurrentGeneration.Count; i++)
+            {
+                CurrentGeneration[i].FitnessRank = i;
+            }
+
+            BestChromosome = CurrentGeneration.Last();
         }
 
         private void PopulationInit()
         {
-            throw new NotImplementedException();
+            ChildrenInit();
         }
     }
 }

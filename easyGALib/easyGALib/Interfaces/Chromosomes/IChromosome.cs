@@ -5,7 +5,8 @@ namespace easyGALib.Interfaces.Chromosomes
     public interface IChromosome
     {
         IList Genes { get; set; }
-        double FitnessRank { get; set; }
+        int FitnessRank { get; set; }
+        double Fitness { get; set; }
         IChromosome CreateCopy();
 
         void OnePtCrossover(IChromosome parentB);

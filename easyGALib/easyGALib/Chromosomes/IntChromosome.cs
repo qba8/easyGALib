@@ -14,22 +14,22 @@ namespace easyGALib.Chromosomes
             _rdm = new Random();
         }
 
-public override void Mutate()
-{
-    int index = _rdm.Next(0, Genes.Count - 1);
-    int gene = (int)Genes[index];
+        public override void Mutate()
+        {
+            int index = _rdm.Next(0, Genes.Count - 1);
+            int gene = (int)Genes[index];
 
-    int diff = gene * _rdm.Next(1, 1000) / 1000;
+            int diff = gene * _rdm.Next(1, 1000) / 1000;
 
-    if (_rdm.Next(0, 1) == 1)
-    {
-        Genes[index] = gene + diff;
-    }
-    else
-    {
-        Genes[index] = gene - diff;
-    }
-}
+            if (_rdm.Next(0, 1) == 1)
+            {
+                Genes[index] = gene + diff;
+            }
+            else
+            {
+                Genes[index] = gene - diff;
+            }
+        }
 
         public override void OnePtCrossover(IChromosome parentB)
         {

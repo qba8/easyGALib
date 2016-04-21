@@ -8,7 +8,10 @@ namespace easyGALib.Interfaces
         CrossoverType CrossoverType { get; set; }
 
         long GenerationsLimit { get; set; }
+
         int ChromosomesQuantity { get; set; }
+        int GenesQuantity { get; set; }
+
         int RandomSelectionChance { get; set; }
         int CrossoverChance { get; set; }
         int MutationChance { get; set; }
