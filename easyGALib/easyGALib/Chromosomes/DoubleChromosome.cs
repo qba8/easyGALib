@@ -11,6 +11,11 @@ namespace easyGALib.Chromosomes
             Genes = new List<double>();
         }
 
+        public override IChromosome CreateCopy()
+        {
+            throw new NotImplementedException();
+        }
+
         public override void Mutate()
         {
             throw new NotImplementedException();

@@ -13,6 +13,14 @@ namespace easyGALib.Algorithm
         public List<IChromosome> CurrentGeneration { get; set; }
         public IChromosome BestChromosome { get; set; }
         public List<IChromosome> NextGeneration { get; set; }
+        protected Random _rdm;
+
+        public GABase()
+        {
+            CurrentGeneration = new List<IChromosome>();
+            NextGeneration = new List<IChromosome>();
+            _rdm = new Random();
+        }
 
         public abstract void ChildrenInit();
 
@@ -43,9 +51,7 @@ namespace easyGALib.Algorithm
 
         private void Crossover()
         {
-            Random rdm = new Random();
-
-            NextGeneration.Shuffle();
+            NextGeneration.Shuffle(_rdm);
 
             int length = NextGeneration.Count;
             if (length % 2 == 1)
@@ -58,7 +64,7 @@ namespace easyGALib.Algorithm
                 var parentA = NextGeneration[i];
                 var parentB = NextGeneration[i + 1];
 
-                if (rdm.Next(0, 100) < _input.Parameters.CrossoverChance)
+                if (_rdm.Next(0, 100) < _input.Parameters.CrossoverChance)
                 {
                     switch (_input.Parameters.CrossoverType)
                     {
@@ -85,7 +91,7 @@ namespace easyGALib.Algorithm
             //Elitism - best chromosome always go to the next generation
             NextGeneration.Add(BestChromosome.CreateCopy());
 
-            for (int i = 0; i < _input.Parameters.ChromosomesQuantity; i++)
+            for (int i = 0; i < _input.Parameters.ChromosomesQuantity-1; i++)
             {
                 var chromosome = FindChromosome();
                 NextGeneration.Add(chromosome.CreateCopy());
@@ -94,20 +100,19 @@ namespace easyGALib.Algorithm
 
         private IChromosome FindChromosome()
         {
-            Random rdm = new Random();
             bool found = false;
             int index = -1;
 
             while (!found)
             {
-                index = rdm.Next(0, _input.Parameters.ChromosomesQuantity - 1);
+                index = _rdm.Next(0, _input.Parameters.ChromosomesQuantity - 1);
 
                 //We should give some random selection chance by parameter
-                if (_input.Parameters.RandomSelectionChance > rdm.Next(0, 100))
+                if (_input.Parameters.RandomSelectionChance > _rdm.Next(0, 100))
                 {
                     found = true;
                 }
-                else if (CurrentGeneration[index].FitnessRank > rdm.Next(0, _input.Parameters.ChromosomesQuantity)) //Better chromosome = bigger chance to go to the next generation
+                else if (CurrentGeneration[index].FitnessRank > _rdm.Next(0, _input.Parameters.ChromosomesQuantity)) //Better chromosome = bigger chance to go to the next generation
                 {
                     found = true;
                 }
@@ -123,11 +128,9 @@ namespace easyGALib.Algorithm
 
         private void Mutate()
         {
-            Random rdm = new Random();
-
             foreach (IChromosome item in NextGeneration)
             {
-                if (_input.Parameters.MutationChance > rdm.Next(0, 100))
+                if (_input.Parameters.MutationChance > _rdm.Next(0, 100))
                 {
                     item.Mutate();
                 }

@@ -13,10 +13,7 @@ namespace easyGALib.Chromosomes
 
         public IList Genes { get; set; }
 
-        public IChromosome CreateCopy()
-        {
-            throw new NotImplementedException();
-        }
+        public abstract IChromosome CreateCopy();
 
         public abstract void Mutate();
 

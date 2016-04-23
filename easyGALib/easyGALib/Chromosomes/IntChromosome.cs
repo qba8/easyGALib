@@ -8,10 +8,21 @@ namespace easyGALib.Chromosomes
     {
         private Random _rdm;
 
-        public IntChromosome()
+        public IntChromosome(Random rdm)
         {
             Genes = new List<int>();
-            _rdm = new Random();
+            _rdm = rdm;
+        }
+
+        public override IChromosome CreateCopy()
+        {
+            var chromosome = new IntChromosome(_rdm);
+            foreach (var gene in Genes)
+            {
+                chromosome.Genes.Add(gene);
+            }
+
+            return chromosome;
         }
 
         public override void Mutate()

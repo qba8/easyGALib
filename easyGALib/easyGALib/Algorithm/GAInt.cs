@@ -10,14 +10,13 @@ namespace easyGALib.Algorithm
         {
             for (int i = 0; i < _input.Parameters.ChromosomesQuantity; i++)
             {
-                var chromosome = new IntChromosome();
+                var chromosome = new IntChromosome(_rdm);
 
                 for (int j = 0; j < _input.Parameters.GenesQuantity; j++)
                 {
-                    Random rdm = new Random();
-                    int val = rdm.Next(0, 1000) / rdm.Next(1, 1000);
+                    int val = _rdm.Next(0, 10);
 
-                    if (rdm.Next(0, 1) == 1)
+                    if (_rdm.Next(0, 1) == 1)
                     {
                         val = -val;
                     }
