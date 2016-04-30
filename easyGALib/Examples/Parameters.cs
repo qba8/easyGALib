@@ -18,6 +18,10 @@ namespace Examples
 
         public int GenesQuantity { get; set; }
 
+        public int InitRunsQuantity { get; set; }
+
+        public int BestChromosomesPerRun { get; set; }
+
         public int MutationChance { get; set; }
 
         public int RandomSelectionChance { get; set; }

@@ -13,12 +13,14 @@ namespace easyGALib.Algorithm
         public List<IChromosome> CurrentGeneration { get; set; }
         public IChromosome BestChromosome { get; set; }
         public List<IChromosome> NextGeneration { get; set; }
+        public List<IChromosome> InitChromosomes { get; set; }
         protected Random _rdm;
 
         public GABase()
         {
             CurrentGeneration = new List<IChromosome>();
             NextGeneration = new List<IChromosome>();
+            InitChromosomes = new List<IChromosome>();
             _rdm = new Random();
         }
 
@@ -91,7 +93,7 @@ namespace easyGALib.Algorithm
             //Elitism - best chromosome always go to the next generation
             NextGeneration.Add(BestChromosome.CreateCopy());
 
-            for (int i = 0; i < _input.Parameters.ChromosomesQuantity-1; i++)
+            for (int i = 0; i < _input.Parameters.ChromosomesQuantity - 1; i++)
             {
                 var chromosome = FindChromosome();
                 NextGeneration.Add(chromosome.CreateCopy());
@@ -156,7 +158,18 @@ namespace easyGALib.Algorithm
 
         private void PopulationInit()
         {
-            ChildrenInit();
+            for (int i = 0; i < _input.Parameters.InitRunsQuantity; i++)
+            {
+                CurrentGeneration.Clear();
+                ChildrenInit();
+
+                CalculateFitness();
+
+                InitChromosomes.AddRange(CurrentGeneration.Skip(Math.Max(0, CurrentGeneration.Count() - _input.Parameters.BestChromosomesPerRun)));
+            }
+
+            CurrentGeneration.RemoveRange(0, _input.Parameters.BestChromosomesPerRun * _input.Parameters.InitRunsQuantity);
+            CurrentGeneration.AddRange(InitChromosomes);
         }
     }
 }

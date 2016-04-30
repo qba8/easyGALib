@@ -14,7 +14,7 @@ namespace easyGALib.Algorithm
 
                 for (int j = 0; j < _input.Parameters.GenesQuantity; j++)
                 {
-                    int val = _rdm.Next(0, 10);
+                    int val = _rdm.Next(0, 100);
 
                     if (_rdm.Next(0, 1) == 1)
                     {

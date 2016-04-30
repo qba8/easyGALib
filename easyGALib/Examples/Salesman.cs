@@ -47,14 +47,16 @@ namespace Examples
         {
             Parameters = new Parameters()
             {
-                ChromosomesQuantity = 500,
+                ChromosomesQuantity = 300,
                 CromosomeType = easyGALib.Types.ChromosomeType.IntChromosome,
                 CrossoverChance = 80,
                 CrossoverType = easyGALib.Types.CrossoverType.TwoPt,
-                GenerationsLimit = 5000,
+                GenerationsLimit = 1000,
                 GenesQuantity = 4,
                 MutationChance = 5,
-                RandomSelectionChance = 6
+                RandomSelectionChance = 6,
+                InitRunsQuantity = 100,
+                BestChromosomesPerRun = 3
             };
         }
     }

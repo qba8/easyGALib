@@ -12,6 +12,9 @@ namespace easyGALib.Interfaces
         int ChromosomesQuantity { get; set; }
         int GenesQuantity { get; set; }
 
+        int InitRunsQuantity { get; set; }
+        int BestChromosomesPerRun { get; set; }
+
         int RandomSelectionChance { get; set; }
         int CrossoverChance { get; set; }
         int MutationChance { get; set; }
