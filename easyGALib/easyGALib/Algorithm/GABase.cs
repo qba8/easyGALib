@@ -14,7 +14,11 @@ namespace easyGALib.Algorithm
         public IChromosome BestChromosome { get; set; }
         public List<IChromosome> NextGeneration { get; set; }
         public List<IChromosome> InitChromosomes { get; set; }
+
         protected Random _rdm;
+        protected IGeneticAlgorithmInput _input;
+
+        public abstract void ChildrenInit();
 
         public GABase()
         {
@@ -23,10 +27,6 @@ namespace easyGALib.Algorithm
             InitChromosomes = new List<IChromosome>();
             _rdm = new Random();
         }
-
-        public abstract void ChildrenInit();
-
-        protected IGeneticAlgorithmInput _input;
 
         public IGAResult Execute(IGeneticAlgorithmInput input)
         {
@@ -42,13 +42,63 @@ namespace easyGALib.Algorithm
                 Crossover();
                 Mutate();
 
-                NextGeneration.RemoveAt(NextGeneration.Count - 1);
-                NextGeneration.Add(BestChromosome.CreateCopy());
-
+                IncludeBestChromosome();
                 generation++;
             }
 
             return new GAResult() { BestChromosome = BestChromosome };
+        }
+
+        private void PopulationInit()
+        {
+            for (int i = 0; i < _input.Parameters.InitRunsQuantity; i++)
+            {
+                CurrentGeneration.Clear();
+                ChildrenInit();
+
+                CalculateFitness();
+
+                InitChromosomes.AddRange(CurrentGeneration.Skip(Math.Max(0, CurrentGeneration.Count() - _input.Parameters.BestChromosomesPerRun)));
+            }
+
+            CurrentGeneration.RemoveRange(0, _input.Parameters.BestChromosomesPerRun * _input.Parameters.InitRunsQuantity);
+            CurrentGeneration.AddRange(InitChromosomes);
+        }
+
+        private bool IsFinalGeneration(long generation)
+        {
+            return generation >= _input.Parameters.GenerationsLimit;
+        }
+
+        private void CalculateFitness()
+        {
+            foreach (var chromosome in CurrentGeneration)
+            {
+                chromosome.Fitness = _input.GetFitness(chromosome);
+            }
+
+            CurrentGeneration = CurrentGeneration.OrderBy(g => g.Fitness).ToList();
+
+            for (int i = 0; i < CurrentGeneration.Count; i++)
+            {
+                CurrentGeneration[i].FitnessRank = i;
+            }
+
+            BestChromosome = CurrentGeneration.Last();
+        }
+
+        private void SelectChromosomes()
+        {
+            NextGeneration.Clear();
+
+            //Elitism - best chromosome always go to the next generation
+            NextGeneration.Add(BestChromosome.CreateCopy());
+
+            for (int i = 0; i < _input.Parameters.ChromosomesQuantity - 1; i++)
+            {
+                var chromosome = FindChromosome();
+                NextGeneration.Add(chromosome.CreateCopy());
+            }
         }
 
         private void Crossover()
@@ -86,18 +136,21 @@ namespace easyGALib.Algorithm
             }
         }
 
-        private void SelectChromosomes()
+        private void Mutate()
         {
-            NextGeneration.Clear();
-
-            //Elitism - best chromosome always go to the next generation
-            NextGeneration.Add(BestChromosome.CreateCopy());
-
-            for (int i = 0; i < _input.Parameters.ChromosomesQuantity - 1; i++)
+            foreach (IChromosome item in NextGeneration)
             {
-                var chromosome = FindChromosome();
-                NextGeneration.Add(chromosome.CreateCopy());
+                if (_input.Parameters.MutationChance > _rdm.Next(0, 100))
+                {
+                    item.Mutate();
+                }
             }
+        }
+
+        private void IncludeBestChromosome()
+        {
+            NextGeneration.RemoveAt(NextGeneration.Count - 1);
+            NextGeneration.Add(BestChromosome.CreateCopy());
         }
 
         private IChromosome FindChromosome()
@@ -121,55 +174,6 @@ namespace easyGALib.Algorithm
             }
 
             return CurrentGeneration[index];
-        }
-
-        private bool IsFinalGeneration(long generation)
-        {
-            return generation >= _input.Parameters.GenerationsLimit;
-        }
-
-        private void Mutate()
-        {
-            foreach (IChromosome item in NextGeneration)
-            {
-                if (_input.Parameters.MutationChance > _rdm.Next(0, 100))
-                {
-                    item.Mutate();
-                }
-            }
-        }
-
-        private void CalculateFitness()
-        {
-            foreach (var chromosome in CurrentGeneration)
-            {
-                chromosome.Fitness = _input.GetFitness(chromosome);
-            }
-
-            CurrentGeneration = CurrentGeneration.OrderBy(g => g.Fitness).ToList();
-
-            for (int i = 0; i < CurrentGeneration.Count; i++)
-            {
-                CurrentGeneration[i].FitnessRank = i;
-            }
-
-            BestChromosome = CurrentGeneration.Last();
-        }
-
-        private void PopulationInit()
-        {
-            for (int i = 0; i < _input.Parameters.InitRunsQuantity; i++)
-            {
-                CurrentGeneration.Clear();
-                ChildrenInit();
-
-                CalculateFitness();
-
-                InitChromosomes.AddRange(CurrentGeneration.Skip(Math.Max(0, CurrentGeneration.Count() - _input.Parameters.BestChromosomesPerRun)));
-            }
-
-            CurrentGeneration.RemoveRange(0, _input.Parameters.BestChromosomesPerRun * _input.Parameters.InitRunsQuantity);
-            CurrentGeneration.AddRange(InitChromosomes);
         }
     }
 }

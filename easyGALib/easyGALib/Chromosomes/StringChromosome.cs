@@ -6,7 +6,8 @@ namespace easyGALib.Chromosomes
 {
     internal class StringChromosome : Chromosome<IStringChromosome>, IStringChromosome
     {
-        public StringChromosome()
+        public StringChromosome(Random rdm)
+            :base(rdm)
         {
             Genes = new List<string>();
         }
@@ -17,21 +18,6 @@ namespace easyGALib.Chromosomes
         }
 
         public override void Mutate()
-        {
-            throw new NotImplementedException();
-        }
-
-        public override void OnePtCrossover(IChromosome parentB)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override void TwoPtCrossover(IChromosome parentB)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override void UniformCrossover(IChromosome parentB)
         {
             throw new NotImplementedException();
         }

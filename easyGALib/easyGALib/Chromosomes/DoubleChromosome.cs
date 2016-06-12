@@ -6,7 +6,8 @@ namespace easyGALib.Chromosomes
 {
     internal class DoubleChromosome : Chromosome<IDoubleChromosome>, IDoubleChromosome
     {
-        public DoubleChromosome()
+        public DoubleChromosome(Random rdm)
+            : base(rdm)
         {
             Genes = new List<double>();
         }
@@ -17,21 +18,6 @@ namespace easyGALib.Chromosomes
         }
 
         public override void Mutate()
-        {
-            throw new NotImplementedException();
-        }
-
-        public override void OnePtCrossover(IChromosome parentB)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override void TwoPtCrossover(IChromosome parentB)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override void UniformCrossover(IChromosome parentB)
         {
             throw new NotImplementedException();
         }

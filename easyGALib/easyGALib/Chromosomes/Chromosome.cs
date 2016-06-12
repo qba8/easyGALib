@@ -7,6 +7,8 @@ namespace easyGALib.Chromosomes
     public abstract class Chromosome<T> : IChromosome
         where T : IChromosome
     {
+        protected Random Randomizer;
+
         public double Fitness { get; set; }
 
         public int FitnessRank { get; set; }
@@ -17,10 +19,51 @@ namespace easyGALib.Chromosomes
 
         public abstract void Mutate();
 
-        public abstract void OnePtCrossover(IChromosome parentB);
+        public Chromosome(Random rdm)
+        {
+            Randomizer = rdm;
+        }
 
-        public abstract void TwoPtCrossover(IChromosome parentB);
+        public void OnePtCrossover(IChromosome parentB)
+        {
+            int crossoverPt = Randomizer.Next(0, Genes.Count - 1);
+            for (int i = crossoverPt; i < Genes.Count; i++)
+            {
+                SwapGene(i, this, parentB);
+            }
 
-        public abstract void UniformCrossover(IChromosome parentB);
+        }
+
+        public void TwoPtCrossover(IChromosome parentB)
+        {
+            int crossoverPtA = Randomizer.Next(0, Genes.Count - 1);
+            int crossoverPtB = Randomizer.Next(0, Genes.Count - 1);
+
+            if (crossoverPtA != crossoverPtB)
+            {
+                for (int i = crossoverPtA; i < crossoverPtB; i++)
+                {
+                    SwapGene(i, this, parentB);
+                }
+            }
+        }
+
+        public void UniformCrossover(IChromosome parentB)
+        {
+            for (int i = 0; i < Genes.Count; i++)
+            {
+                if (Randomizer.Next(0, 1) == 1)
+                {
+                    SwapGene(i, this, parentB);
+                }
+            }
+        }
+
+        private void SwapGene(int i, IChromosome chromA, IChromosome chromB)
+        {
+            var temp = chromA.Genes[i];
+            chromA.Genes[i] = chromB.Genes[i];
+            chromB.Genes[i] = temp;
+        }
     }
 }

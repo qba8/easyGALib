@@ -56,7 +56,6 @@
     <Compile Include="Interfaces\Algorithm\IGAResult.cs" />
     <Compile Include="Chromosomes\Chromosome.cs" />
     <Compile Include="Types\ChromosomeType.cs" />
-    <Compile Include="Constants\Exceptions.cs" />
     <Compile Include="Constants\Settings.cs" />
     <Compile Include="Factories\GAFactory.cs" />
     <Compile Include="Interfaces\Algorithm\IGABase.cs" />

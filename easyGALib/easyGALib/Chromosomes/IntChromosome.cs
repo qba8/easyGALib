@@ -6,17 +6,15 @@ namespace easyGALib.Chromosomes
 {
     internal class IntChromosome : Chromosome<IIntChromosome>, IIntChromosome
     {
-        private Random _rdm;
-
         public IntChromosome(Random rdm)
+            :base(rdm)
         {
             Genes = new List<int>();
-            _rdm = rdm;
         }
 
         public override IChromosome CreateCopy()
         {
-            var chromosome = new IntChromosome(_rdm);
+            var chromosome = new IntChromosome(Randomizer);
             foreach (var gene in Genes)
             {
                 chromosome.Genes.Add(gene);
@@ -27,12 +25,12 @@ namespace easyGALib.Chromosomes
 
         public override void Mutate()
         {
-            int index = _rdm.Next(0, Genes.Count - 1);
+            int index = Randomizer.Next(0, Genes.Count - 1);
             int gene = (int)Genes[index];
 
-            int diff = gene * _rdm.Next(1, 1000) / 1000;
+            int diff = gene * Randomizer.Next(1, 1000) / 1000;
 
-            if (_rdm.Next(0, 1) == 1)
+            if (Randomizer.Next(0, 1) == 1)
             {
                 Genes[index] = gene + diff;
             }
@@ -40,48 +38,6 @@ namespace easyGALib.Chromosomes
             {
                 Genes[index] = gene - diff;
             }
-        }
-
-        public override void OnePtCrossover(IChromosome parentB)
-        {
-            int crossoverPt = _rdm.Next(0, Genes.Count - 1);
-            for (int i = crossoverPt; i < Genes.Count; i++)
-            {
-                swapGene(i, this, parentB);
-            }
-
-        }
-
-        public override void TwoPtCrossover(IChromosome parentB)
-        {
-            int crossoverPtA = _rdm.Next(0, Genes.Count - 1);
-            int crossoverPtB = _rdm.Next(0, Genes.Count - 1);
-
-            if (crossoverPtA != crossoverPtB)
-            {
-                for (int i = crossoverPtA; i < crossoverPtB; i++)
-                {
-                    swapGene(i, this, parentB);
-                }
-            }
-        }
-
-        public override void UniformCrossover(IChromosome parentB)
-        {
-            for (int i = 0; i < Genes.Count; i++)
-            {
-                if (_rdm.Next(0, 1) == 1)
-                {
-                    swapGene(i, this, parentB);
-                }
-            }
-        }
-
-        private void swapGene(int i, IChromosome chromA, IChromosome chromB)
-        {
-            var temp = chromA.Genes[i];
-            chromA.Genes[i] = chromB.Genes[i];
-            chromB.Genes[i] = temp;
-        }
+        }        
     }
 }
