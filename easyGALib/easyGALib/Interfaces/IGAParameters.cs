@@ -18,5 +18,10 @@ namespace easyGALib.Interfaces
         int RandomSelectionChance { get; set; }
         int CrossoverChance { get; set; }
         int MutationChance { get; set; }
+        
+        /// <summary>
+        /// Optional fitness threshold for early termination. If null, no early termination.
+        /// </summary>
+        double? FitnessThreshold { get; set; }
     }
 }

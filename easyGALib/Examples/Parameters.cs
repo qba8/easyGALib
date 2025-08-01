@@ -25,5 +25,7 @@ namespace Examples
         public int MutationChance { get; set; }
 
         public int RandomSelectionChance { get; set; }
+
+        public double? FitnessThreshold { get; set; }
     }
 }

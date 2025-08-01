@@ -31,7 +31,9 @@ namespace easyGALib.Algorithm
 
         public IGAResult Execute(IGeneticAlgorithmInput input)
         {
-            _input = input;
+            _input = input ?? throw new ArgumentNullException(nameof(input));
+            ValidateParameters(_input.Parameters);
+            
             long generation = 0;
 
             PopulationInit();
@@ -68,7 +70,18 @@ namespace easyGALib.Algorithm
 
         private bool IsFinalGeneration(long generation)
         {
-            return generation >= _input.Parameters.GenerationsLimit;
+            if (generation >= _input.Parameters.GenerationsLimit)
+                return true;
+                
+            // Early termination if fitness threshold is reached
+            if (_input.Parameters.FitnessThreshold.HasValue && 
+                BestChromosome != null && 
+                BestChromosome.Fitness >= _input.Parameters.FitnessThreshold.Value)
+            {
+                return true;
+            }
+                
+            return false;
         }
 
         private void CalculateFitness()
@@ -156,25 +169,50 @@ namespace easyGALib.Algorithm
 
         private IChromosome FindChromosome()
         {
-            bool found = false;
-            int index = -1;
-
-            while (!found)
+            const int maxAttempts = 1000; // Prevent infinite loops
+            
+            for (int attempt = 0; attempt < maxAttempts; attempt++)
             {
-                index = _rdm.Next(0, _input.Parameters.ChromosomesQuantity - 1);
+                int index = _rdm.Next(0, _input.Parameters.ChromosomesQuantity);
 
                 //We should give some random selection chance by parameter
                 if (_input.Parameters.RandomSelectionChance > _rdm.Next(0, Settings.PercentageMaxValue))
                 {
-                    found = true;
+                    return CurrentGeneration[index];
                 }
                 else if (CurrentGeneration[index].FitnessRank > _rdm.Next(0, _input.Parameters.ChromosomesQuantity)) //Better chromosome = bigger chance to go to the next generation
                 {
-                    found = true;
+                    return CurrentGeneration[index];
                 }
             }
+            
+            // Fallback: return a random chromosome to prevent infinite loops
+            int fallbackIndex = _rdm.Next(0, _input.Parameters.ChromosomesQuantity);
+            return CurrentGeneration[fallbackIndex];
+        }
 
-            return CurrentGeneration[index];
+        private void ValidateParameters(IGAParameters parameters)
+        {
+            if (parameters == null)
+                throw new ArgumentException("Parameters cannot be null");
+            
+            if (parameters.ChromosomesQuantity <= 0)
+                throw new ArgumentException("ChromosomesQuantity must be positive", nameof(parameters.ChromosomesQuantity));
+                
+            if (parameters.GenesQuantity <= 0)
+                throw new ArgumentException("GenesQuantity must be positive", nameof(parameters.GenesQuantity));
+                
+            if (parameters.GenerationsLimit <= 0)
+                throw new ArgumentException("GenerationsLimit must be positive", nameof(parameters.GenerationsLimit));
+                
+            if (parameters.CrossoverChance < 0 || parameters.CrossoverChance > Settings.PercentageMaxValue)
+                throw new ArgumentException($"CrossoverChance must be between 0 and {Settings.PercentageMaxValue}", nameof(parameters.CrossoverChance));
+                
+            if (parameters.MutationChance < 0 || parameters.MutationChance > Settings.PercentageMaxValue)
+                throw new ArgumentException($"MutationChance must be between 0 and {Settings.PercentageMaxValue}", nameof(parameters.MutationChance));
+                
+            if (parameters.RandomSelectionChance < 0 || parameters.RandomSelectionChance > Settings.PercentageMaxValue)
+                throw new ArgumentException($"RandomSelectionChance must be between 0 and {Settings.PercentageMaxValue}", nameof(parameters.RandomSelectionChance));
         }
     }
 }

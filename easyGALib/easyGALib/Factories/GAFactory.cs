@@ -1,4 +1,5 @@
-﻿using easyGALib.Interfaces.Algorithm;
+﻿using System;
+using easyGALib.Interfaces.Algorithm;
 using easyGALib.Interfaces.Factories;
 using easyGALib.Algorithm;
 using easyGALib.Types;
@@ -20,7 +21,7 @@ namespace easyGALib.Factories
                 case ChromosomeType.IntChromosome:
                     return GetGAInt();
                 default:
-                    return null;
+                    throw new ArgumentException($"Unsupported chromosome type: {type}", nameof(type));
             }
         }
 
