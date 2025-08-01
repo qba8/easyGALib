@@ -5,7 +5,7 @@ using easyGALib.Types;
 
 namespace easyGALib.Factories
 {
-    class GAFactory : IGAFactory
+    public class GAFactory : IGAFactory
     {
         public IGABase GetGA(ChromosomeType type)
         {

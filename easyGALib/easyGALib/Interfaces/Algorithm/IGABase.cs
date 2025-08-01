@@ -1,6 +1,6 @@
 ﻿namespace easyGALib.Interfaces.Algorithm
 {
-    internal interface IGABase
+    public interface IGABase
     {
         IGAResult Execute(IGeneticAlgorithmInput input);
     }

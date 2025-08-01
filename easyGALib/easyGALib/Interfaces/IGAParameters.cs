@@ -4,7 +4,7 @@ namespace easyGALib.Interfaces
 {
     public interface IGAParameters
     {
-        ChromosomeType CromosomeType { get; set; }
+        ChromosomeType ChromosomeType { get; set; }
         CrossoverType CrossoverType { get; set; }
 
         long GenerationsLimit { get; set; }

@@ -8,7 +8,7 @@ namespace Examples
     {
         public int ChromosomesQuantity { get; set; }
 
-        public ChromosomeType CromosomeType { get; set; }
+        public ChromosomeType ChromosomeType { get; set; }
 
         public int CrossoverChance { get; set; }
 

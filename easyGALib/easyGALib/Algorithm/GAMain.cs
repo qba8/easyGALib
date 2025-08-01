@@ -17,7 +17,7 @@ namespace easyGALib.Algorithm
 
         public IGAResult Execute()
         {
-            IGABase ga = _gaFactory.GetGA(_input.Parameters.CromosomeType); 
+            IGABase ga = _gaFactory.GetGA(_input.Parameters.ChromosomeType); 
             return ga.Execute(_input);
         }
     }

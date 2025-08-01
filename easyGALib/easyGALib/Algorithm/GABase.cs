@@ -1,4 +1,5 @@
 ﻿using System;
+using easyGALib.Constants;
 using easyGALib.Interfaces;
 using easyGALib.Interfaces.Algorithm;
 using easyGALib.Interfaces.Chromosomes;
@@ -116,7 +117,7 @@ namespace easyGALib.Algorithm
                 var parentA = NextGeneration[i];
                 var parentB = NextGeneration[i + 1];
 
-                if (_rdm.Next(0, 100) < _input.Parameters.CrossoverChance)
+                if (_rdm.Next(0, Settings.PercentageMaxValue) < _input.Parameters.CrossoverChance)
                 {
                     switch (_input.Parameters.CrossoverType)
                     {
@@ -140,7 +141,7 @@ namespace easyGALib.Algorithm
         {
             foreach (IChromosome item in NextGeneration)
             {
-                if (_input.Parameters.MutationChance > _rdm.Next(0, 100))
+                if (_input.Parameters.MutationChance > _rdm.Next(0, Settings.PercentageMaxValue))
                 {
                     item.Mutate();
                 }
@@ -163,7 +164,7 @@ namespace easyGALib.Algorithm
                 index = _rdm.Next(0, _input.Parameters.ChromosomesQuantity - 1);
 
                 //We should give some random selection chance by parameter
-                if (_input.Parameters.RandomSelectionChance > _rdm.Next(0, 100))
+                if (_input.Parameters.RandomSelectionChance > _rdm.Next(0, Settings.PercentageMaxValue))
                 {
                     found = true;
                 }
