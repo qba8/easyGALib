@@ -1,4 +1,5 @@
 ﻿using easyGALib.Chromosomes;
+using easyGALib.Constants;
 using easyGALib.Interfaces.Algorithm;
 using System;
 
@@ -14,9 +15,9 @@ namespace easyGALib.Algorithm
 
                 for (int j = 0; j < _input.Parameters.GenesQuantity; j++)
                 {
-                    int val = _rdm.Next(0, 100);
+                    int val = _rdm.Next(Settings.DefaultIntGeneMinValue, Settings.DefaultIntGeneMaxValue);
 
-                    if (_rdm.Next(0, 1) == 1)
+                    if (_rdm.Next(0, Settings.RandomBooleanThreshold + 1) == Settings.RandomBooleanThreshold)
                     {
                         val = -val;
                     }

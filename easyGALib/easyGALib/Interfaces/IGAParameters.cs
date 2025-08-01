@@ -4,7 +4,7 @@ namespace easyGALib.Interfaces
 {
     public interface IGAParameters
     {
-        ChromosomeType CromosomeType { get; set; }
+        ChromosomeType ChromosomeType { get; set; }
         CrossoverType CrossoverType { get; set; }
 
         long GenerationsLimit { get; set; }
@@ -18,5 +18,10 @@ namespace easyGALib.Interfaces
         int RandomSelectionChance { get; set; }
         int CrossoverChance { get; set; }
         int MutationChance { get; set; }
+        
+        /// <summary>
+        /// Optional fitness threshold for early termination. If null, no early termination.
+        /// </summary>
+        double? FitnessThreshold { get; set; }
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace easyGALib.Interfaces.Algorithm
 {
-    internal interface IGADouble : IGABase
+    public interface IGADouble : IGABase
     {
     }
 }

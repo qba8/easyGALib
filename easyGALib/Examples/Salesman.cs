@@ -48,7 +48,7 @@ namespace Examples
             Parameters = new Parameters()
             {
                 ChromosomesQuantity = 300,
-                CromosomeType = easyGALib.Types.ChromosomeType.IntChromosome,
+                ChromosomeType = easyGALib.Types.ChromosomeType.IntChromosome,
                 CrossoverChance = 80,
                 CrossoverType = easyGALib.Types.CrossoverType.TwoPt,
                 GenerationsLimit = 1000,

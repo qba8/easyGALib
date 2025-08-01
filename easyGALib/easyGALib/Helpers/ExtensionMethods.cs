@@ -12,7 +12,7 @@ namespace easyGALib.Helpers
             {
                 length--;
                 int k = rdm.Next(length + 1);
-                T value = list[length];
+                T value = list[k];
                 list[k] = list[length];
                 list[length] = value;
             }

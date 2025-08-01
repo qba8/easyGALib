@@ -1,10 +1,15 @@
-﻿namespace easyGALib
+﻿namespace easyGALib.Constants
 {
-    internal partial class Constants
+    internal static class Settings
     {
-        internal static class Settings
-        {
-            internal static string LibraryName = "easyGALib";
-        }
+        internal const string LibraryName = "easyGALib";
+        
+        // Default gene value ranges
+        internal const int DefaultIntGeneMinValue = 0;
+        internal const int DefaultIntGeneMaxValue = 100;
+        
+        // Random generation constants
+        internal const int RandomBooleanThreshold = 1;
+        internal const int PercentageMaxValue = 100;
     }
 }

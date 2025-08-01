@@ -8,7 +8,7 @@ namespace Examples
     {
         public int ChromosomesQuantity { get; set; }
 
-        public ChromosomeType CromosomeType { get; set; }
+        public ChromosomeType ChromosomeType { get; set; }
 
         public int CrossoverChance { get; set; }
 
@@ -25,5 +25,7 @@ namespace Examples
         public int MutationChance { get; set; }
 
         public int RandomSelectionChance { get; set; }
+
+        public double? FitnessThreshold { get; set; }
     }
 }
